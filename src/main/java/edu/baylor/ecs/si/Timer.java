@@ -41,8 +41,12 @@ public class Timer {
 			logger.severe("InterruptedException rised");
 			throw new TimerException("Sleep exception", e);
 		} finally {
-			logger.info("Calling took: "+ (System.currentTimeMillis() - timeNow));
-			logger.info("* should take: "+ timeToWait);
+			try {
+				logger.info("Calling took: "+ (System.currentTimeMillis() - timeNow));
+				logger.info("* should take: "+ timeToWait);
+			} catch (NullPointerException e) {
+				logger.severe("NullPointerException rised");
+			}
 		}
 		return timeNow;
 	}
